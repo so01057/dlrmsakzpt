@@ -1,0 +1,54 @@
+CREATE TABLE USERDB( --유저 정보 테이블
+
+
+U_NAME   NVARCHAR2(10), --이름
+
+U_ID     NVARCHAR2(10) PRIMARY KEY, --아이디
+
+U_PW     NVARCHAR2(20), --비밀번호
+
+U_ADDR   NVARCHAR2(50), --주소
+
+U_BIRTH  DATE,          --생년월일
+
+U_PNUM   NVARCHAR2(13) --연락처
+
+);
+
+ 
+
+SELECT TO_CHAR(UBIRTH, 'YYYY-MM-DD') FROM USER;
+
+
+ 
+
+CREATE TABLE ACCOUNT( --계좌 / 잔액 테이블
+
+A_BAL   NUMBER,         --잔액
+
+A_U_ID  NVARCHAR2(10),  --유저아이디 외래키
+CONSTRAINT AU_ID FOREIGN KEY (A_U_ID)REFERENCES USERDB(U_ID)
+
+);
+
+
+CREATE TABLE GOODS( --상품 정보 테이블
+
+G_NO    NUMBER,         --구매확인코드
+
+G_NAME  NVARCHAR2(20),  --상품명
+
+G_PRICE NUMBER,         --상품가격
+
+G_U_ID  NVARCHAR2(10) ,  --유저아이디 외래키
+
+G_INFO NVARCHAR2(255),  --상품설명
+CONSTRAINT GU_ID FOREIGN KEY (G_U_ID) REFERENCES USERDB(U_ID)
+);
+
+COMMIT;
+
+
+
+ 
+ 
